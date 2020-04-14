@@ -1,0 +1,36 @@
+.outer{
+    height: 300px;
+    background-color: aqua;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.one{
+    display: flex;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: bisque;
+}
+
+.two{
+    display: flex;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: blueviolet;
+}
+.three{
+    display: flex;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: coral;
+}
