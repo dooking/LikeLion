@@ -1,0 +1,53 @@
+.box {
+  width: 100%;
+  min-height: 100px;
+}
+.lime {
+  background-color: lime;
+}
+.blue {
+  background-color: blue;
+}
+.skyblue {
+  background-color: skyblue;
+}
+.green {
+  background-color: green;
+}
+.red {
+  background-color: red;
+}
+.orange {
+  background-color: orange;
+}
+.cyan {
+  background-color: cyan;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .p-0 {
+    width: 50%;
+  }
+  .blue {
+    width: 50%;
+    height: 200px;
+  }
+}
+@media (min-width: 1024px){
+    .blue{
+        width:25%;
+        height:200px;
+    }
+    .p-0{
+        width:50%;
+        height:200px;
+    }
+    .red{
+        width:25%;
+        height:200px;
+    }
+    .row{
+        display:flex;
+        flex-direction: row-reverse;
+    }
+}
