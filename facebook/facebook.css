@@ -1,0 +1,365 @@
+.material-icons.md-size {
+  font-size: 23px;
+}
+.material-icons.md-alert {
+  font-size: 23px;
+}
+.material-icons.md-nav {
+    font-size: 30px;
+    color: rgb(102, 102, 102);
+  }
+.material-icons.md-camera {
+  font-size: 30px;
+  color: #d81e69;
+}
+.material-icons.md-picture {
+  font-size: 20px;
+  color: #4ab64a;
+}
+.material-icons.md-checkin {
+  font-size: 25px;
+  color: #db0569;
+}
+.material-icons.md-earth {
+  font-size: 20px;
+  color: gray;
+}
+.material-icons.md-dot {
+  font-size: 30px;
+  color: rgb(102, 102, 102);
+}
+.material-icons.md-add {
+  font-size: 36px;
+  color: rgb(13, 126, 231);
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+}
+.material-icons.md-circle {
+  font-size: 2.2em;
+  background-color: #e9ebed;
+  border-radius: 50%;
+  padding: 3px;
+}
+.material-icons.md-good {
+  font-size: 10px;
+  color: white;
+  background-color: #3578e5;
+  border-radius: 50%;
+  padding: 4px;
+}
+.material-icons.md-heart {
+  font-size: 10px;
+  color: white;
+  background-color: #f35369;
+  border-radius: 50%;
+  padding: 4px;
+}
+.material-icons.md-tri {
+  font-size: 10px;
+  color: gray;
+}
+.material-icons.md-home {
+    font-size: 30px;
+    color: rgb(13, 126, 231);
+  }
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.space-around {
+  display: flex;
+  justify-content: space-around;
+}
+#text-center {
+  text-align: center;
+}
+#bold {
+  font-weight: bold;
+}
+#gray {
+  color: rgb(129, 128, 128);
+}
+body {
+  max-width: 375px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.header-main {
+  margin-top:50px;
+  display: flex;
+  justify-content: space-between;
+}
+.header-main-logo {
+  width: 130px;
+  height: 50px;
+  background-image: url("logo.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.header-story {
+  display: flex;
+  border-bottom: 10px solid rgb(201, 199, 199);
+}
+.header-story-a {
+  position: relative;
+  margin: 10px 10px 15px 10px;
+}
+.header-story-a > i {
+  position: absolute;
+  left: 35px;
+  top: 85px;
+}
+.header-story-a-image {
+  width: 100px;
+  height: 100px;
+  background-image: url("profileicon.jpg");
+  background-size: cover;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  background-position: center;
+  border: 1px solid #f1eeee;
+  border-bottom: none;
+}
+.header-story-a-text {
+  width: 100px;
+  height: 70px;
+  background-color: #f8f6f6;
+  border: 1px solid #f1eeee;
+  border-top: none;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+.header-story-b{
+  position: relative;
+}
+.header-story-b-image {
+  width: 100px;
+  height: 170px;
+  background-image: url("cok-story.jpg");
+  background-size: cover;
+  border-radius: 1em;
+  margin: 10px 10px 15px 0px;
+}
+.header-story-b-logo{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top:18px;
+  left:8px;
+  background-image: url("cok.png");
+  background-size: cover;
+  border-radius: 50%;
+  border: 3px solid rgb(13, 126, 231);
+}
+.header-story-b > span{
+  position: absolute;
+    color: white;
+    top: 155px;
+    left: 8px;
+    font-size: 14px;
+}
+.write-think {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  border-bottom: 1px solid #f1eeee;
+}
+.write-think-letter {
+  width: 250px;
+}
+.write-think-image {
+  width: 50px;
+  height: 50px;
+  background-image: url("profileicon.jpg");
+  background-size: cover;
+  border-radius: 50%;
+  border: 1px solid #f1eeee;
+  background-position: center;
+  margin: 15px 10px 15px 15px;
+}
+.write-button {
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 10px solid rgb(201, 199, 199);
+  font-size: 18px;
+}
+.write-button-box > span {
+  margin-right: 5px;
+}
+.write-button-box {
+  margin: 7px 0px 7px 0px;
+}
+#write-button-line > span {
+  margin-right: 5px;
+}
+#write-button-line {
+  border-left: 1px solid #f1eeee;
+  border-right: 1px solid #f1eeee;
+  padding: 0px 27px 0px 27px;
+  margin: 7px 0px 7px 0px;
+}
+.cardview-content {
+  margin: 0px 0px 10px 10px;
+}
+.cardview-page {
+  display: flex;
+  align-items: center;
+}
+.cardview-page-image {
+  width: 60px;
+  height: 50px;
+  background-image: url("iu_profile.jpg");
+  background-size: cover;
+  border-radius: 50%;
+  margin: 10px 0px 10px 10px;
+}
+.cardview-page-text {
+  width: 100%;
+  margin: 10px;
+}
+.cardview-page-text-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardview-page-text-bottom {
+  display: flex;
+  align-items: center;
+}
+.cardview-photo {
+  display: flex;
+  width: 100%;
+}
+.cardview-photo-main {
+  width: 65%;
+  height: 402px;
+  background-image: url("iu_1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.cardview-photo-sub {
+  width: 35%;
+  height: 400px;
+}
+.cardview-photo-01 {
+  height: 33%;
+  background-image: url("iu_2.jpg");
+  background-size: cover;
+  margin: 0px 0px 3px 3px;
+}
+.cardview-photo-02 {
+  height: 33%;
+  background-image: url("iu_3.jpg");
+  background-size: cover;
+  margin: 0px 0px 3px 3px;
+}
+.cardview-photo-03 {
+  height: 33%;
+  background-image: url("iu_4.jpg");
+  background-size: cover;
+  margin-left: 3px;
+  position: relative;
+}
+.cardview-photo-03-letter {
+  position: absolute;
+  color: white;
+  font-size: 30px;
+  left: 10px;
+  top: 40px;
+}
+.cardview-comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1eeee;
+  padding: 10px 0px 10px 0px;
+  margin: 0px 10px 0px 10px;
+  font-size: 18px;
+}
+.cardview-comment-left {
+  position: relative;
+}
+.cardview-comment-left > span {
+  position: absolute;
+  left: 40px;
+  width: 70px;
+}
+.cardview-comment-left-02 {
+  position: absolute;
+  left: 15px;
+  z-index: -1;
+}
+.cardview-comment-right {
+  width: 65%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cardview-comment-right-icon {
+  width: 20px;
+  height: 20px;
+  background-image: url("profileicon.jpg");
+  background-size: cover;
+  border-radius: 50%;
+  background-position: center;
+}
+.cardview-button {
+  border-bottom: 5px solid rgb(201, 199, 199);
+  margin-bottom: 70px;
+}
+.cardview-button-area {
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+}
+.cardview-button-area > span {
+  margin-right: 8px;
+}
+.nav-bar {
+  width: 100%;
+  max-width: 375px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  bottom: 0px;
+  background-color: white;
+  padding: 0px 0px 10px 0px;
+}
+.nav-bar>span{
+    padding-top: 8px;
+    margin-left:30px;
+}
+#select{
+    border-top:2px solid rgb(13, 126, 231) ;
+    padding-top: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.alert-bar {
+  width: 100%;
+  max-width: 375px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  background-color: white;
+  z-index: 3;
+  box-sizing: border-box;
+  padding: 10px 0px 10px 10px;
+}
+.alert-bar-right{
+  display: flex;
+  align-items: center;
+}
+.alert-bar> span{
+  margin-left:15px;
+  font-weight: bold;
+}
+.alert-bar-right > i{
+  margin-right:5px;
+}
