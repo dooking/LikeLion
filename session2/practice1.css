@@ -1,0 +1,31 @@
+.left_draw{
+    display: flex;
+    width: 800px;
+    height: 300px;
+    margin-left:100px;
+}
+.right_draw{
+    background-color: antiquewhite;
+    width: 400px;
+    height: 300px;
+    margin-left:50px;
+}
+.draw{
+    margin : 100px;
+    position: relative;
+    background-color: antiquewhite;
+    width: 400px;
+    height: 300px;
+    z-index: 1;
+    bottom: 400px;
+    opacity: 0.3;
+}
+.sum_draw{
+    margin: 100px;
+    position: relative;
+}
+.prac1{
+    position: fixed;
+    width: 300px;
+    height: 200px;
+}

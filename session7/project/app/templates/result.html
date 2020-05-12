@@ -1,0 +1,19 @@
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'result.css' %}" />
+</head>
+<body>
+  글자수 : {{total_len}}
+  <br />
+  텍스트 : {{text}}
+  <br />
+  공백 XXX : {{noblank_text}}
+  <br />
+  글자 수 : {{noblank_len}}
+  <br />
+  <form action="{% url 'back' %}" method="POST">
+    {% csrf_token %}
+    <br />
+    <input type="submit" value="돌아가기" />
+  </form>
+</body>
