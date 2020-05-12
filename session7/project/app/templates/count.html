@@ -1,9 +1,17 @@
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'count.css' %}" />
+</head>
+
 <body>
-  <h1>글자를 입력해보세요!</h1>
-  <form action="{% url 'result' %}" method="POST">
-    {% csrf_token %}
-    <textarea name="text" cols="60" rows="10"></textarea>
-    <br>
-    <input type="submit" value="제출하기" />
-  </form>
+
+  <h1>글자수세기!</h1>
+  <div class=content>
+    <form action="{% url 'result' %}" method="POST">
+      {% csrf_token %}
+      <textarea name="text" cols="60" rows="20" placeholder="텍스트를 입력해주세요."></textarea>
+      <br>
+      <input type="submit" value="제출하기" style="width: 100px;height: 50px;margin-top: 10px;"/>
+    </form>
+  </div>
 </body>
