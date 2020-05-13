@@ -21,6 +21,7 @@ h1{
 }
 .content-bottom{
   border: 1px gray solid;
+  background-color: rgb(117, 170, 117);
 }
 .content-title{
   width: 100%;

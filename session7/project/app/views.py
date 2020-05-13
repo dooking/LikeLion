@@ -16,6 +16,8 @@ def result(request):
     for word in text:
         if(word == ' '):
             cnt += 1
+    if(text==''):
+        cnt = 0
 
     return render(request, 'result.html', {
         'total_len': total_len,
