@@ -1,29 +1,28 @@
-h1{
+h1 {
   text-align: center;
   padding-top: 30px;
 }
-#blue{
+#blue {
   color: blue;
   font-size: 30px;
 }
-.content-flex{
+.content-flex {
   display: flex;
 }
-.content{
+.content {
   width: 40%;
   margin: 50px;
 }
-.content-top{
+.content-top {
   height: 200px;
   border: 1px gray solid;
   border-bottom: 1px rgb(243, 243, 243) solid;
   padding: 10px 10px 10px 20px;
 }
-.content-bottom{
+.content-bottom {
   border: 1px gray solid;
-  background-color: rgb(117, 170, 117);
 }
-.content-title{
+.content-title {
   width: 100%;
   display: flex;
   justify-content: space-around;
