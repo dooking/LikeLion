@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'detail.css' %}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-menu">
+            <div class="header-menu-box">
+                <p>홈</p>
+            </div>
+            <a href="{% url 'movie' %}" id="red">영화 <span id="gray"> ({{movie_cnt}})</span></a>
+            <a href="{% url 'drama' %}" id="blue">드라마 <span id="gray"> ({{drama_cnt}})</span></a>
+            <a href="{% url 'entertain' %}" id="green">예능 <span id="gray"> ({{entertain_cnt}})</span></a>
+        </div>
+    </div>
+    </div>
+    <div class="content">
+        <div class="content-title">
+            <p> {{articles.title}}</p>
+        </div>
+        <div class="content-content">
+            <p> {{articles.content}}</p>
+        </div>
+        <div class="content-time">
+            <p>작성시간 : {{articles.time}}</p>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="{% url 'new' %}">글쓰러가기</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'new.css' %}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-menu">
+            <p id="black">홈</p>
+            <p id="red">영화 <span id="gray"> ({{movie_cnt}})</span></p>
+            <p id="blue">드라마 <span id="gray"> ({{drama_cnt}})</span></p>
+            <p id="green">예능 <span id="gray"> ({{entertain_cnt}})</span></p>
+        </div>
+    </div>
+    </div>
+    <div class="content">
+        <form method="POST">
+            {% csrf_token %}
+            <select name="category" style="margin: 10px 0px 0px 20px;">
+                <option value="movie">영화</option>
+                <option value="drama">드라마</option>
+                <option value="entertain">예능</option>
+            </select>
+            <input type= text name="title" placeholder="제목을 입력해주세요" style="width: 95%; height: 30px; margin:10px 20px 0px 20px;">
+            <br>
+            <input type = text name="content" placeholder="내용을 입력해주세요" style="width: 95%; height: 400px; margin:20px 20px 15px 20px;">
+            <button type="submit" style="float: right; margin-right:20px;">작성하기</button>
+        </form>
+    </div>
+    <div class="footer">
+        <a href="{% url 'index' %}">뒤로가기</a>
+    </div>
+</body>
+
+</html>

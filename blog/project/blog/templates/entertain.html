@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'entertain.css' %}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>entertain</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-menu">
+            <a href="{% url 'index' %}" id="black">홈 </a>
+            <a href="{% url 'movie' %}" id="red">영화 <span id="gray"> ({{movie_cnt}})</span></a>
+            <a href="{% url 'drama' %}" id="blue">드라마 <span id="gray"> ({{drama_cnt}})</span></a>
+            <div class="header-menu-box">
+                <p id="green">예능 <span id="gray"> ({{entertain_cnt}})</span></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="content">
+        <div class="content-flex content-title">
+            <div class="content-box "><span>번호</span></div>
+            <div class="content-box"><span>제목</span></div>
+            <div class="content-box"><span>시간</span></div>
+        </div>
+        <div>
+            {% for article in articles %}
+            <div class="content-flex content-row">
+            <div class="content-box"><span>{{article.pk}}</span></div>
+            <div class="content-box"><a href="{% url 'detail' article.pk %}">{{article.title}}</a></div>
+            <div class="content-box"><span>{{article.time}}</span></div>
+            <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="footer">
+        <a href="{% url 'new' %}">글쓰러가기</a>
+    </div>
+</body>
+
+</html>
