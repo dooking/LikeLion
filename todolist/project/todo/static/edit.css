@@ -1,0 +1,30 @@
+a {
+    text-decoration:none; 
+    color: black;
+   }
+body{
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+}
+.header{
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    color : purple;
+}
+.content{
+    margin-top:50px;
+    height: 60%;
+}
+.content-choose{
+    display: flex;
+    justify-content: space-evenly;
+}
+.content-choose-box{
+    display: flex;
+    align-self: center;
+    margin-top: 120px;
+    border: 3px skyblue solid;
+    padding: 5px;
+}
