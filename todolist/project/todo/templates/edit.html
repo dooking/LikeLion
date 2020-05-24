@@ -1,39 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'edit.css' %}" />
+{% endblock %}
+<title>{% block title %}edit{% endblock %}</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'edit.css' %}" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Detail</title>
-</head>
+{% block headbar %}
+<p>김동현의 To Do List</p>
+{% endblock %}
 
-<body>
-    <div class="header">
-        <p>To Do List</p>
-    </div>
-    <div class="content">
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" value="{{post.title}}" placeholder="{{dolists.title}}" style="width: 500px; height: 30px">
+    <input type="text" name="content" value="{{post.content}}" placeholder="{{dolists.content}}"
+        style="width: 100%;height: 400px;margin-top: 20px;">
+    <input type="date" name="deadline" value="{{post.deadline}}" style="margin-top: 20px;"">
+    <button type="submit">수정하기</button>
 
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" name="title" value="{{post.title}}" placeholder="제목을 입력해주세요" 
-            style="width: 500px; height: 30px">
-            <input type=" text" name="content" value="{{post.content}}" placeholder="내용을 입력해주세요" 
-            style="width: 100%;height: 400px;margin-top: 20px;">
-            <input type="date" name="deadline" value="{{post.deadline}}" placeholder="마감기한을 입력해주세요"
-            style="margin-top: 20px;"">
-            <button type="submit">수정하기</button>
+    {% endblock %}
 
-    </div>
-    <div class="content-choose">
-        <div class="content-choose-box">
-            <span class="material-icons">home</span>
-            <a href="{% url 'home' %}">홈으로</a>
-        </div>
+    {% block footer %}
+    <div class="content-choose-box">
+        <span class="material-icons">home</span>
+        <a href="{% url 'home' %}">홈으로</a>
     </div>
 
-
-
-</body>
+    {% endblock %}

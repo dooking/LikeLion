@@ -7,6 +7,10 @@ body{
     height: 600px;
     margin: 0 auto;
 }
+input[type=text]{
+    border: 3px skyblue solid;
+    border-radius: 0.5em;
+}
 .header{
     text-align: center;
     font-weight: bold;

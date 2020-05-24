@@ -1,48 +1,42 @@
 {% extends 'base.html' %}
-    {% load static %}
-    {% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
-    {% endblock %}
-    <title>Home</title>
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
+{% endblock %}
+<title>{% block title %}home{% endblock %}</title>
 
-  <body>
-    <div class="header">
-      {% block main %}
-      <p>To Do List</p>
-      {% endblock %}
-    </div>
-    {% block content %}
-    <div class="content">
-      <div class="content-flex content-title">
-        <div class="content-box"><span>제목</span></div>
-        <div class="content-box"><span>마감기한</span></div>
-      </div>
-      <div>
-        {% load mathfilters %} {% for dolist in dolists %}
-        <div class="content-flex content-row">
-          <input type="checkbox" />
-          <div class="content-box">
-            <a href="{% url 'detail' dolist.pk %}">{{dolist.title}}</a>
-          </div>
-          {% if dolist.dday >= 0 %}
-          <div class="content-box">
-            <span><span id="bold">{{dolist.dday}}</span>일 남았습니다</span>
-          </div>
-          {% else %}
-          <div class="content-box">
-            <span><span id="bold">{{dolist.dday|abs}}</span>일 지났습니다</span>
-          </div>
-          {% endif %}
-          <br />
-        </div>
-        {% endfor %}
-      </div>
-      <div class="content-choose-box">
-        <span class="material-icons">brush</span>
-        <a href="{% url 'new' %}">추가하기</a>
-      </div>
-    </div>
+{% block headbar %}
+<p>김동현의 To Do List</p>
+{% endblock %}
 
-    {% endblock %}
-  </body>
-</html>
+{% block content %}
+<div class="content-flex content-title">
+  <div class="content-box"><span>제목</span></div>
+  <div class="content-box"><span>마감기한</span></div>
+</div>
+<div>
+  {% load mathfilters %} {% for dolist in dolists %}
+  <div class="content-flex content-row">
+    <input type="checkbox" />
+    <div class="content-box">
+      <a href="{% url 'detail' dolist.pk %}">{{dolist.title}}</a>
+    </div>
+    {% if dolist.dday >= 0 %}
+    <div class="content-box">
+      <span><span id="bold">{{dolist.dday}}</span>일 남았습니다</span>
+    </div>
+    {% else %}
+    <div class="content-box">
+      <span><span id="bold">{{dolist.dday|abs}}</span>일 지났습니다</span>
+    </div>
+    {% endif %}
+    <br />
+  </div>
+  {% endfor %}
+</div>
+<div class="content-choose-box">
+  <span class="material-icons">brush</span>
+  <a href="{% url 'new' %}">추가하기</a>
+</div>
+
+{% endblock %}
