@@ -8,3 +8,7 @@ class dolist(models.Model):
     dday = models.IntegerField(default = 0)
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    post = models.ForeignKey(dolist, on_delete=models.CASCADE, related_name = 'comments')
+    content = models.TextField()

@@ -7,6 +7,14 @@ body{
     height: 600px;
     margin: 0 auto;
 }
+input[type=text]{
+    width: 78%;
+    margin: 0px 30px 0px 30px;
+    border: 2px skyblue solid;
+    border-radius: 0.5em;
+    height: 20px;
+    text-align: center;
+}
 .header{
     text-align: center;
     font-weight: bold;
@@ -16,6 +24,24 @@ body{
 .content{
     margin-top:50px;
     height: 60%;
+    border-bottom: 3px skyblue solid;
+}
+.content-comment{
+    margin:20px;
+}
+.content-comment-box{
+    display: flex;
+    align-items: center;
+    margin: 15px 30px 15px 30px;
+}
+.content-comment-box-delete{
+    margin: 0px 20px;
+    padding: 2px;
+    border: 2px solid skyblue;
+}
+.content-comment-box-delete > a{
+    color: red;
+    font-weight: bold;
 }
 .content-add{
     text-align: end;

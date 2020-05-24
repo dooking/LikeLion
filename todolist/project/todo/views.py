@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import dolist
+from .models import dolist,Comment
 from datetime import datetime
 # Create your views here.
 
@@ -30,6 +30,13 @@ def new(request):
 
 def detail(request, post_pk):
     dolists = dolist.objects.get(pk=post_pk)
+
+    if(request.method =="POST"):
+        Comment.objects.create(
+            post = dolists,
+            content = request.POST['content']
+        )
+        return redirect('detail',post_pk)
     return render(request, 'detail.html', {'dolist': dolists})
 
 
@@ -50,3 +57,8 @@ def edit(request, post_pk):
         return redirect('detail', post_pk)
 
     return render(request, 'edit.html', {'dolists': dolists})
+
+def delete_comment(request,post_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    comment.delete()
+    return redirect('detail', post_pk)
