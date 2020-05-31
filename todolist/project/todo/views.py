@@ -72,8 +72,8 @@ def delete_comment(request, post_pk, comment_pk):
 
 def signup(request):
     if(request.method == "POST"):
-        found_user = User.objects.get(username=request.POST['username'])
-        if(found_user is not None):
+        found_user = User.objects.filter(username=request.POST['username'])
+        if(found_user is None):
             error = 'username이 이미 존재합니다'
             return render(request, 'signup.html', {'error': error})
 

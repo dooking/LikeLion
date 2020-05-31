@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
 {% load static %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
@@ -6,12 +8,17 @@
 <title>{% block title %}home{% endblock %}</title>
 
 {% block headbar %}
-<p>김동현의 To Do List</p>
+{% if user.username %}
+<p>{{ user.username }}의 To Do List</p>
+{% else %}
+<p>로그인 후 사용해주세요~</p>
+{% endif %}
 {% if user.is_authenticated %}
-<p>안녕하세요, {{ user.username }}님 </p>
 <a href="{% url 'logout' %}">로그아웃</a>
 {% else %}
 <a href="{% url 'login' %}">로그인</a>
+<a href=" {% provider_login_url 'google' %}">구글 로그인</a>
+<a href=" {% provider_login_url 'kakao' %}">카카오 로그인</a>
 <a href="{% url 'signup' %}">회원가입</a>
 {% endif %}
 {% endblock %}
@@ -22,7 +29,9 @@
   <div class="content-box"><span>마감기한</span></div>
 </div>
 <div>
-  {% load mathfilters %} {% for dolist in dolists %}
+  {% load mathfilters %} 
+  {% for dolist in dolists %}
+  {% if user.pk == dolist.author.pk %}
   <div class="content-flex content-row">
     <input type="checkbox" />
     <div class="content-box">
@@ -39,11 +48,14 @@
     {% endif %}
     <br />
   </div>
+  {% endif %}
   {% endfor %}
 </div>
+
+{% if user.is_authenticated %}
 <div class="content-choose-box">
   <span class="material-icons">brush</span>
   <a href="{% url 'new' %}">추가하기</a>
 </div>
-
+{% endif %}
 {% endblock %}
