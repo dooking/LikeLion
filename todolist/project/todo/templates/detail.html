@@ -23,16 +23,20 @@
 <div class="content-comment">
   <form method="POST">
     {% csrf_token %}
+    {% if user.is_authenticated %}
     <input type="text" name="content" placeholder="댓글을 입력해주세요" />
     <button type="submit">댓글 쓰기</button>
+    {% endif %}
   </form>
   {% for comment in dolist.comments.all %}
   <div class="content-comment-box">
     <span class="material-icons">subdirectory_arrow_right</span>
     <p>{{ comment.content }}</p>
+    {% if user.is_authenticated and comment.author.pk == user.pk %}
     <div class="content-comment-box-delete">
       <a href="{% url 'delete_comment' dolist.pk comment.pk %}">X</a>
     </div>
+    {% endif %}
   </div>
   {% endfor%}
 </div>
@@ -41,6 +45,7 @@
     <span class="material-icons">home</span>
     <a href="{% url 'home' %}">홈으로</a>
   </div>
+  {% if user.is_authenticated and dolist.author.pk == user.pk %}
   <div class="content-choose-box">
     <span class="material-icons">delete</span>
     <a href="{% url 'delete' dolist.pk %}">삭제하기</a>
@@ -49,6 +54,7 @@
     <span class="material-icons">brush</span>
     <a href="{% url 'edit' dolist.pk %}">수정하기</a>
   </div>
+  {% endif %}
 </div>
 
 {% endblock %}

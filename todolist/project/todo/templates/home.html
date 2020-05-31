@@ -7,6 +7,13 @@
 
 {% block headbar %}
 <p>김동현의 To Do List</p>
+{% if user.is_authenticated %}
+<p>안녕하세요, {{ user.username }}님 </p>
+<a href="{% url 'logout' %}">로그아웃</a>
+{% else %}
+<a href="{% url 'login' %}">로그인</a>
+<a href="{% url 'signup' %}">회원가입</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}

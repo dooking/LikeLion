@@ -1,0 +1,13 @@
+{% block content %}
+ <h1>로그인</h1>
+ {% if error %}
+ <h3 style="color: red;">{{ error }}</h3>
+ {% endif %}
+ <form method="POST">
+     {% csrf_token %}
+     <input type="text" name ="username" placeholder="아이디를 입력하세요">
+     <input type="password" name ="password" placeholder="비밀번호를 입력하세요">
+     <button type="submit">가입하기</button>
+     
+ </form>
+{% endblock %}

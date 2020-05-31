@@ -13,10 +13,16 @@ body{
     font-weight: bold;
 }
 .header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     text-align: center;
     font-weight: bold;
     font-size: 30px;
     color : purple;
+}
+.header > a{
+    border: 3px skyblue solid;
 }
 .content{
     height: 100%;
