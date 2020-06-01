@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 django-mathfilters = "*"
 mathfilters = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.7"
