@@ -19,6 +19,7 @@ from todo import views
 
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
+    path('map/',views.map,name="map"),
     #auth
     path('signup',views.signup,name="signup"),
     path('login',views.login,name="login"),

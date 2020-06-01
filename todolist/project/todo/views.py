@@ -103,3 +103,6 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+def map(request):
+    return render(request,'map.html')
