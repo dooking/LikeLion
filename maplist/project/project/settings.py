@@ -17,11 +17,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 with open(os.path.join(BASE_DIR, 'project/config/index.json')) as f:
     secrets = json.loads(f.read())
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@w6-0o$i#0=4(9%j8r481(bebuvqf4xr$c4s350e7%iz&*q9o1'
+SECRET_KEY = 'p=w&!kw(rqejp6vo2h5a!m2ah!9z20bxm=i!1+9ldw4t-zff+3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,16 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'todo',
-    'mathfilters',
-    'django.contrib.sites',
-    'allauth', 
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.kakao'
-
-
+    'myapp',
 ]
 
 MIDDLEWARE = [
@@ -123,7 +115,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

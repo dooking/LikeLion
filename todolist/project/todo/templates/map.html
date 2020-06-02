@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>주소로 장소 표시하기</title>
-
+    <link rel="stylesheet" type="text/css" href="detail.css" />
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         <h2>댓글댓글</h2>
     </div>
     <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38351d671bc16ef7ce49106c5e96f272&libraries=services"></script>
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{KAKAO_JS_KEY}}&libraries=services"></script>
     <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
