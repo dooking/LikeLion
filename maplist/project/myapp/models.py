@@ -1,16 +1,43 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
-class dolist(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    deadline = models.DateField()
-    dday = models.IntegerField(default = 0)
-    author = models.ForeignKey(User,on_delete=models.CASCADE, related_name='posts')
+class Post(models.Model):
+    name = models.CharField(max_length=50)
+    pNumber = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    hours = models.CharField(max_length=50)
+    website = models.CharField(max_length=150)
+    menu = models.CharField(max_length=50)
+    likes = models.CharField(max_length=50)
     def __str__(self):
-        return self.title
+        return self.name
 
 class Comment(models.Model):
-    post = models.ForeignKey(dolist, on_delete=models.CASCADE, related_name = 'comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name = 'comments')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,related_name = 'writer' )
+    time = models.DateTimeField(auto_now_add=True)
+    grade = models.CharField(max_length=50)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE,related_name = 'ccomments' )
+    def __str__(self):
+        return self.user_id
+
+class UserInfo(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,related_name = 'user_info')
+    user_type =models.CharField(max_length=50)
+    user_number =models.CharField(max_length=50)
+    user_email = models.CharField(max_length=50)
+
+class Survey(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,related_name = 'survey_info')
+    problem_1 = models.CharField(max_length=50)
+    problem_2 = models.CharField(max_length=50)
+    problem_3 = models.CharField(max_length=50)
+    problem_4 = models.CharField(max_length=50)
+    problem_5 = models.CharField(max_length=50)
+
+#    def result_of_survey(problem_1,problem_2,problem_3,problem_4,problem_5):
+#        return result
+
+class CardNews(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.TextField()
