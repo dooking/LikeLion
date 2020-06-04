@@ -13,10 +13,16 @@ img {
     font-size: 2em;
     font-weight: bold;
 }
-
-.title{
+.red{
+    
+}
+.flex{
     display: flex;
-    width: 800px;
+}
+.click {
+    cursor: pointer;
+}
+.title{
     padding: 20px;
     border-bottom: 2px gray solid;
 }
@@ -27,18 +33,14 @@ img {
     padding-right:10px;
 }
 .title-left{
-    display: flex;
     align-items: center;
-    width: 70%;
+    margin-right: auto;
 }
 
 .title-right{
-    display: flex;
     align-items: center;
-    width: 30%;
 }
 .photo{
-    display: flex;
     width: 800px;
     border-bottom: 2px gray solid;
 }

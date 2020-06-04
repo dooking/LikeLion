@@ -10,12 +10,12 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="title" value="{{post.title}}" placeholder="{{dolists.title}}" style="width: 500px; height: 30px">
-    <input type="text" name="content" value="{{post.content}}" placeholder="{{dolists.content}}"
-        style="width: 100%;height: 400px;margin-top: 20px;">
-    <input type="date" name="deadline" value="{{post.deadline}}" style="margin-top: 20px;"">
+    <input type="text" name="content" value="{{post.content}}" placeholder="{{dolists.content}}" style="width: 100%;height: 400px;margin-top: 20px;">
+    <input type="date" name="deadline" value="{{post.deadline}}" style="margin-top: 20px;">
+    <input type="file" name="img">
     <button type="submit">수정하기</button>
 
     {% endblock %}

@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import dolist, Comment
-from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
 from project.settings import KAKAO_JS_KEY
+from project.settings import AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,AWS_STORAGE_BUCKET_NAME,AWS_S3_REGION_NAME
+# Create your views here.
+import boto3
+from boto3.session import Session
+from datetime import datetime
 # Create your views here.
 
 
@@ -22,12 +26,13 @@ def home(request):
 @login_required(login_url='login')
 def new(request):
     if request.method == "POST":
-        print(request)
+        file_to_upload = request.FILES.get('img')
         new_post = dolist.objects.create(
             title=request.POST['title'],
             content=request.POST['content'],
             deadline=request.POST['deadline'],
-            author = request.user
+            author = request.user,
+            img = img_upload(request,file_to_upload)
         )
         return redirect('detail', new_post.pk)
         # return render(request,'detail.html',{'new_post':new_post})
@@ -41,7 +46,7 @@ def detail(request, post_pk):
         Comment.objects.create(
             post=dolists,
             content=request.POST['content'],
-            author = request.user
+            author = request.user,
         )
         return redirect('detail', post_pk)
     return render(request, 'detail.html', {'dolist': dolists})
@@ -55,14 +60,15 @@ def delete(request, post_pk):
 
 def edit(request, post_pk):
     dolists = dolist.objects.get(pk=post_pk)
-    if(request.method == "POST"):
+    if request.method == "POST":
+        file_to_upload = request.FILES.get('img')
         dolist.objects.filter(pk=post_pk).update(
             title=request.POST['title'],
             content=request.POST['content'],
             deadline=request.POST['deadline'],
+            img = img_upload(request,file_to_upload)
         )
         return redirect('detail', post_pk)
-
     return render(request, 'edit.html', {'dolists': dolists})
 
 
@@ -108,3 +114,21 @@ def logout(request):
 
 def map(request):
     return render(request,'map.html',{'KAKAO_JS_KEY':KAKAO_JS_KEY})
+
+def img_upload(request, file_to_upload):
+    session = Session(
+        aws_access_key_id = AWS_ACCESS_KEY_ID,
+        aws_secret_access_key = AWS_SECRET_ACCESS_KEY,
+        region_name = AWS_S3_REGION_NAME
+        )
+    s3 = session.resource('s3')
+    now = datetime.now().strftime("%Y%H%M%S")
+    user_pk = str(request.user.pk)+'/'
+
+    img_object = s3.Bucket(AWS_STORAGE_BUCKET_NAME).put_object(
+        Key =  now + user_pk + file_to_upload.name,
+        Body = file_to_upload
+    )
+    s3_url = 'https://dooking-file-upload.s3.ap-northeast-2.amazonaws.com/' + now + user_pk + file_to_upload.name
+    return s3_url
+    

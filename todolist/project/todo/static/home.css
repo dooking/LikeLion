@@ -5,7 +5,6 @@ a {
    }
 body{
     width: 800px;
-    height: 600px;
     margin: 0 auto;
 }
 #bold {
@@ -57,7 +56,6 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
     float: right;
     border: 3px skyblue solid;
     margin-top:50px;

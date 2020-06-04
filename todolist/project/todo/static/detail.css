@@ -23,7 +23,6 @@ input[type=text]{
 }
 .content{
     margin-top:50px;
-    height: 60%;
     border-bottom: 3px skyblue solid;
 }
 .content-comment{
@@ -55,7 +54,6 @@ input[type=text]{
 }
 .content-content{
     width: 800px;
-    height: 200px;
     margin:20px;
     margin-top:70px;
 }
