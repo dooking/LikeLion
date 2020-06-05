@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import dolist, Comment
+from .models import Post, Comment, UserInfo, Survey, CardNews
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib import auth
