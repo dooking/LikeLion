@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      function innerHTMLTest() {
+        var randValNode = document.getElementById("rand-val");
+        randValNode.innerHTML =
+          "<button><font color='red'>" + Math.random() + "</font></button>";
+      }
+    </script>
+  </head>
+  <body>
+    <div id="rand-val">Let's generate random Value</div>
+    <button onclick="innerHTMLTest()">Generate</button>
+  </body>
+</html>
