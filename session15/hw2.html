@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>과제2</title>
+    <style>
+      body {
+        padding: 30px;
+      }
+      div {
+        padding: 23px;
+        border: 1px solid #999999;
+        background-color: white;
+      }
+      .blue {
+        background-color: blue;
+      }
+      .white {
+        background-color: white;
+      }
+      .yellow {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <div></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const divs = document.querySelectorAll("div");
+
+      divs.forEach(function (element) {
+        element.addEventListener("click", (event) => {
+          init();
+          event.path[0].setAttribute("class", "blue");
+          if (event.path[1] !== "BODY") {
+            event.path[1].setAttribute("class", "yellow");
+          }
+        });
+      });
+      const init = () => {
+        const eBody = document.querySelector("body");
+        divs.forEach((element) => {
+          element.setAttribute("class", "white");
+        });
+        eBody.setAttribute("class", "white");
+      };
+      init();
+    </script>
+  </body>
+</html>

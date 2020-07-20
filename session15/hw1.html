@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hw1</title>
+  </head>
+  <body style="margin: 0 auto; max-width: 450px;">
+    <h1 style="color: purple; text-align: center;">글자 수 세기</h1>
+    <input
+      id="inputText"
+      type="textarea"
+      style="width: 400px; height: 200px; text-align: center;"
+    />
+    <p id="textLength" style="text-align: center;">글자수는 ??</p>
+
+    <script>
+      const inputText = document.querySelector("#inputText");
+      const textLength = document.querySelector("#textLength");
+      inputText.addEventListener("keyup", (event) => {
+        textLength.innerHTML =
+          "글자수는 " +
+          event.target.value.length +
+          "입니다♬ <br/>" +
+          "공백 제외 글자수는" +
+          event.target.value.replace(" ", "").length +
+          "입니다♬";
+      });
+    </script>
+  </body>
+</html>
