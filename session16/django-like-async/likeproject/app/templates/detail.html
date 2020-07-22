@@ -23,7 +23,7 @@
   <button id="pick-button" onclick="pickButton()">찜하기</button>
   {% endif %}
   <div id="like-count">좋아요 {{post.likes.count}}개</div>
-  <div id="pick-count">찜하기 {{post.picks.count}}개</div>
+  <div id="pick-count">찜하기 X</div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -32,11 +32,11 @@
     axios
       .post("/like", {
         post_pk: "{{post.pk}}",
+        isInit : false
       })
       .then((response) => {
 
         like_count.innerHTML = "좋아요 " + response.data.like_count + "개";
-        console.log("과연? :",response.data)
         if (response.data.isLike) {
           like_count.style.color = "red";
         } else {
@@ -51,13 +51,17 @@
     axios
       .post("/pick", {
         post_pk: "{{post.pk}}",
+        isInit : false
       })
       .then((response) => {
-        pick_count.innerHTML = "찜하기" + response.data.pick_count;
-        if (response.data.isLike) {
-          pick_count.style.color = "black";
-        } else {
+        console.log("과연? :",response.data)
+
+        if (response.data.isPick) {
           pick_count.style.color = "blue";
+          pick_count.innerHTML = "찜하기 O";
+        } else {
+          pick_count.style.color = "black";
+          pick_count.innerHTML = "찜하기 X";
         }
       })
       .catch((err) => console.error(err));
@@ -66,31 +70,33 @@
     like_count = document.getElementById("like-count");
     pick_count = document.getElementById("pick-count");
     axios
-      .get("/like", {
+      .post("/like", {
         post_pk: "{{post.pk}}",
+        isInit : true
       })
       .then((response) => {
-        if (response.data.isLike) {
+        if (response.data.nowLike) {
           like_count.style.color = "red";
         } else {
           like_count.style.color = "black";
         }
       })
       .catch((err) => console.error(err));
-
-      axios
-      .post("/pick", {
-        post_pk: "{{post.pk}}",
-      })
-      .then((response) => {
-        if (response.data.isLike) {
-          pick_count.style.color = "blue";
-        } else {
-          pick_count.style.color = "black";
-        }
-      })
-      .catch((err) => console.error(err));
-
+    axios
+    .post("/pick", {
+      post_pk: "{{post.pk}}",
+      isInit : true
+    })
+    .then((response) => {
+      if (response.data.nowPick) {
+        pick_count.style.color = "blue";
+        pick_count.innerHTML = "찜하기 O";
+      } else {
+        pick_count.style.color = "black";
+        pick_count.innerHTML = "찜하기 X";
+      }
+    })
+    .catch((err) => console.error(err));
   }
   init()
 </script>

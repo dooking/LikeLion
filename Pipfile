@@ -13,6 +13,8 @@ psycopg2-binary = "*"
 django = "*"
 django-storages = "*"
 boto3 = "*"
+allauth = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.7"
