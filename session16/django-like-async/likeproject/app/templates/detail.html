@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+  <div>
+    <div>{{ post.title }}</div>
+    <div>{{ post.content }}</div>
+  </div>
+  <a href="{% url 'home' %}">홈으로</a>
+
+  {% if user.is_authenticated and post.author.pk == user.pk %}
+  <a href="{% url 'edit' post.pk %}">수정하기</a>
+  <a href="{% url 'delete' post.pk %}">삭제하기</a>
+  {% endif %} {% for comment in post.comments.all %}
+  <li>{{ comment.content }}</li>
+  {% if user.is_authenticated and comment.author.pk == user.pk %}
+  <a href="{% url 'delete_comment' post.pk comment.pk %}">댓글삭제</a>
+  {% endif %} {% endfor %} {% if user.is_authenticated %}
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="content" placeholder="댓글을 입력하세요" />
+    <button type="submit">댓글 쓰기</button>
+  </form>
+  <button id="like-button" onclick="likeButton()">좋아요</button>
+  <button id="pick-button" onclick="pickButton()">찜하기</button>
+  {% endif %}
+  <div id="like-count">좋아요 {{post.likes.count}}개</div>
+  <div id="pick-count">찜하기 {{post.picks.count}}개</div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const likeButton = () => {
+    like_count = document.getElementById("like-count");
+    axios
+      .post("/like", {
+        post_pk: "{{post.pk}}",
+      })
+      .then((response) => {
+
+        like_count.innerHTML = "좋아요 " + response.data.like_count + "개";
+        console.log("과연? :",response.data)
+        if (response.data.isLike) {
+          like_count.style.color = "red";
+        } else {
+          like_count.style.color = "black";
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const pickButton = () => {
+    pick_count = document.getElementById("pick-count");
+    axios
+      .post("/pick", {
+        post_pk: "{{post.pk}}",
+      })
+      .then((response) => {
+        pick_count.innerHTML = "찜하기" + response.data.pick_count;
+        if (response.data.isLike) {
+          pick_count.style.color = "black";
+        } else {
+          pick_count.style.color = "blue";
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+  const init = () =>{
+    like_count = document.getElementById("like-count");
+    pick_count = document.getElementById("pick-count");
+    axios
+      .get("/like", {
+        post_pk: "{{post.pk}}",
+      })
+      .then((response) => {
+        if (response.data.isLike) {
+          like_count.style.color = "red";
+        } else {
+          like_count.style.color = "black";
+        }
+      })
+      .catch((err) => console.error(err));
+
+      axios
+      .post("/pick", {
+        post_pk: "{{post.pk}}",
+      })
+      .then((response) => {
+        if (response.data.isLike) {
+          pick_count.style.color = "blue";
+        } else {
+          pick_count.style.color = "black";
+        }
+      })
+      .catch((err) => console.error(err));
+
+  }
+  init()
+</script>
+{% endblock content %}
