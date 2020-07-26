@@ -1,248 +1,82 @@
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>주소로 장소 표시하기</title>
-    <link rel="stylesheet" type="text/css" href="static/map.css" />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<head>
+	<meta charset="utf-8"/>
+	<title>Kakao 지도 시작하기</title>
+</head>
+<body>
+    <label>원하는 장소를 검색해보세요! </label>
+    <input type="text" id="test"onkeypress="onKeyPress(event)" style="margin: 15px;">
+    
+	<div id="map" style="width:100%;height:800px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{KAKAO_JS_KEY}}&libraries=services"></script>
+  <script>
+// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-  <body>
-    <script>
-      var slideIndex = 1;
-      showSlides(slideIndex);
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
 
-      function plusSlides(n) {
-        showSlides((slideIndex += n));
-      }
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-      function currentSlide(n) {
-        showSlides((slideIndex = n));
-      }
+// 장소 검색 객체를 생성합니다
 
-      function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {
-          slideIndex = 1;
-        }
-        if (n < 1) {
-          slideIndex = slides.length;
-        }
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-      }
-    </script>
-    <div>
-      <div class="title flex">
-        <div class="title-left flex">
-          <span id="title-bold">써브웨이 고려대점</span>
-          <span class="material-icons">grade</span>
-          <span>4.3</span>
-        </div>
-        <div class="title-right flex">
-          <span class="material-icons">create</span>
-          <span>리뷰쓰기</span>
-          <span class="material-icons">favorite_border</span>
-          <span>즐겨찾기</span>
-        </div>
-      </div>
-      <div class="photo flex">
-        <div class="photo-1"></div>
-        <div class="photo-2"></div>
-      </div>
-      <div class="info">
-        <div class="info-box">
-          <span class="material-icons">call</span>
-          <span>02-922-8413</span>
-        </div>
-        <div class="info-box">
-          <span class="material-icons">location_on</span>
-          <span>서울 성북구 고려대로 88</span>
-          <a href="https://map.kakao.com/link/search/히포크라테스">지도보기</a>
-        </div>
-        <div class="info-box">
-          <span class="material-icons">schedule</span>
-          <span>매일 08:00 - 22:00 (주문은 21:50분까지 받습니다.)</span>
-        </div>
-        <div class="info-box">
-          <span class="material-icons">home</span>
-          <a href="http://www.subway.co.kr/">http://www.subway.co.kr/</a>
-        </div>
+var ps = new kakao.maps.services.Places(); 
 
-        <div class="info-menu">
-          <div class="info-box">
-            <span class="material-icons">menu</span>
-            <span>메뉴판</span>
 
-            <a class="prev click" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next click" onclick="plusSlides(1)">&#10095;</a>
-          </div>
-          <div class="slideshow-container">
-            <div class="mySlides fade">
-              <div class="numbertext">1 / 3</div>
-              <img
-                src="static/image/menu1.JPG"
-                style="width: 100%; height: 200px;"
-              />
-            </div>
-            <div class="mySlides fade">
-              <div class="numbertext">2 / 3</div>
-              <img
-                src="static/image/menu2.JPG"
-                style="width: 100%; height: 200px;"
-              />
-            </div>
+function onKeyPress(event) {
+    if(event.keyCode ===13){
+        sKey = document.getElementById('test').value
+        ps.keywordSearch(sKey, placesSearchCB);
+        document.getElementById('test').value = null;
+    }
+}
+// 키워드로 장소를 검색합니다
+// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
 
-            <div class="mySlides fade">
-              <div class="numbertext">3 / 3</div>
-              <img
-                src="static/image/menu3.JPG"
-                style="width: 100%; height: 200px;"
-              />
-            </div>
-          </div>
-          <br />
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds = new kakao.maps.LatLngBounds();
 
-          <div style="text-align: center;">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-          </div>
-        </div>
-        <div class="info-box">
-          <span class="material-icons">map</span>
-          <span>찾아오시는 길</span>
-        </div>
-      </div>
-      <div
-        id="map"
-        style="width: 500px; height: 350px; margin-left: 20px;"
-      ></div>
-      <div class="sns-go">
-        <ul>
-          <li>
-            <a
-              href="#"
-              onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-              target="_blank"
-              alt="Share on Naver"
-              ><img
-                src="./static/icon/sns_naver.png"
-                width="40"
-                alt="네이버 블러그 공유하기"
-            /></a>
-          </li>
-          <li>
-            <a
-              href="#"
-              onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-              target="_blank"
-              alt="Share on Facebook"
-              ><img
-                src="./static/icon/sns_face.png"
-                width="40"
-                alt="페이스북 공유하기"
-            /></a>
-          </li>
-          <li>
-            <a
-              href="#"
-              onclick="javascript:window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-              target="_blank"
-              alt="Share on Twitter"
-              ><img
-                src="./static/icon/sns_tw.png"
-                width="40"
-                alt="트위터 공유하기"
-            /></a>
-          </li>
-          <li>
-            <a
-              href="#"
-              onclick="javascript:window.open('https://plus.google.com/share?url=' +encodeURIComponent(document.URL), 'googleplussharedialog','menubar=no,toolbar=no,resizable=yes, scrollbars=yes,height=350,width=600');return false;"
-              target="_blank"
-              alt="Share on Google+"
-              ><img
-                src="./static/icon/sns_google.png"
-                width="40"
-                alt="구글 플러스 공유하기"
-            /></a>
-          </li>
-          <li>
-            <a
-              href="#"
-              onclick="javascript:window.open('https://story.kakao.com/s/share?url=' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=400,width=600');return false;"
-              target="_blank"
-              alt="Share on kakaostory"
-              ><img
-                src="./static/icon/sns_kakao.png"
-                width="40"
-                alt="카카오스토리 공유하기"
-            /></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{KAKAO_JS_KEY}}&libraries=services"
-    ></script>
-    <script>
-      var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-        mapOption = {
-          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
-        };
+        for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       
 
-      // 지도를 생성합니다
-      var map = new kakao.maps.Map(mapContainer, mapOption);
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+    } 
+}
 
-      // 주소-좌표 변환 객체를 생성합니다
-      var geocoder = new kakao.maps.services.Geocoder();
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(place) {
+    
+    // 마커를 생성하고 지도에 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    });
 
-      // 주소로 좌표를 검색합니다
-      geocoder.addressSearch("서울 성북구 고려대로 88", function (
-        result,
-        status
-      ) {
-        // 정상적으로 검색이 완료됐으면
-        if (status === kakao.maps.services.Status.OK) {
-          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        let place_name = place.address_name
+        let place_x = place.x
+        let place_y = place.y
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name+'<br/>'+ place.address_name+'<br/>'+place.phone+ '<br/>'+
+        `<a href="https://map.kakao.com/link/to/${place_name},${place_x},${place_y}" style="color:blue" target="_blank">길찾기</a>`+' <button onclick="infowindow.setMap(null); ">닫기</button>'+'</div>');
+        infowindow.open(map, marker);
+    });
 
-          // 결과값으로 받은 위치를 마커로 표시합니다
-          var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords,
-          });
-
-          // 인포윈도우로 장소에 대한 설명을 표시합니다
-          var infowindow = new kakao.maps.InfoWindow({
-            content:
-              '<div style="width:150px;text-align:center;padding:6px 0;">써브웨이</div>',
-          });
-          infowindow.open(map, marker);
-
-          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-          map.setCenter(coords);
-        }
-      });
-
-    </script>
-  </body>
-</html>
+    
+}
+</script>
+    </body>
+    </html>
