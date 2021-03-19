@@ -114,64 +114,75 @@ def logout(request):
 
 @csrf_exempt
 def like(request):
-    isLike = False
-    request_body = json.loads(request.body)
-    post_pk = request_body['post_pk']
     if request.method == "POST":
+        request_body = json.loads(request.body)
+        post_pk = request_body['post_pk']
+        isInit = request_body['isInit']
+        isLike,nowLike = True, True
         existing_like = Like.objects.filter(
             post=Post.objects.get(pk=post_pk),
             user=request.user
         )
-        if existing_like.count() > 0:
-            existing_like.delete()
-            isLike = False
+        if(isInit):
+            if existing_like.count() > 0:
+                nowLike = True
 
+            else:
+                nowLike = False  
         else:
-            Like.objects.create(
-                post=Post.objects.get(pk=post_pk),
-                user=request.user
-            )
-            isLike = True
-    post_likes = Like.objects.filter(
-        post=Post.objects.get(pk=post_pk)
-    )
-    response = {
-        'like_count': post_likes.count(),
-        'isLike' : isLike
-    }
+            if existing_like.count() > 0:
+                existing_like.delete()
+                isLike = False
 
-    return HttpResponse(json.dumps(response))
-
-
-@csrf_exempt
-def pick(request):
-    if request.method == "POST":
-        request_body = json.loads(request.body)
-        post_pk = request_body['post_pk']
-
-        existing_pick = Pick.objects.filter(
-            post=Post.objects.get(pk=post_pk),
-            user=request.user
-        )
-        if existing_pick.count() > 0:
-            existing_pick.delete()
-            isLike = True
-            
-        else:
-            Pick.objects.create(
-                post=Post.objects.get(pk=post_pk),
-                user=request.user
-            )
-            isLike = False
-        post_picks = Pick.objects.filter(
+            else:
+                Like.objects.create(
+                    post=Post.objects.get(pk=post_pk),
+                    user=request.user
+                )
+                isLike = True     
+        post_likes = Like.objects.filter(
             post=Post.objects.get(pk=post_pk)
         )
         response = {
-            'pick_count': post_picks.count(),
-            'isLike' : isLike
+        'like_count': post_likes.count(),
+        'isLike' : isLike,
+        'nowLike' : nowLike
         }
         return HttpResponse(json.dumps(response))
+@csrf_exempt
+def pick(request):
+       if request.method == "POST":
+        request_body = json.loads(request.body)
+        post_pk = request_body['post_pk']
+        isInit = request_body['isInit']
+        isPick,nowPick = True, True
+        existing_like = Pick.objects.filter(
+            post=Post.objects.get(pk=post_pk),
+            user=request.user
+        )
+        if(isInit):
+            print("왜지?",existing_like.count())
+            if existing_like.count() > 0:
+                nowPick = True
 
+            else:
+                nowPick = False  
+        else:
+            if existing_like.count() > 0:
+                existing_like.delete()
+                isPick = False
+
+            else:
+                Pick.objects.create(
+                    post=Post.objects.get(pk=post_pk),
+                    user=request.user
+                )
+                isPick = True     
+        response = {
+        'isPick' : isPick,
+        'nowPick' : nowPick
+        }
+        return HttpResponse(json.dumps(response))
 @login_required
 def myPage(request):
     likes = Like.objects.filter(user = request.user)

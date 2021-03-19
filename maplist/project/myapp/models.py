@@ -23,9 +23,12 @@ class Comment(models.Model):
 
 class UserInfo(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE,related_name = 'user_info')
+    user_pw = models.CharField(max_length=50)
     user_type =models.CharField(max_length=50)
     user_number =models.CharField(max_length=50)
     user_email = models.CharField(max_length=50)
+    user_likes = models.CharField(max_length=50)
+    user_favorites = models.CharField(max_length=50)
 
 class Survey(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE,related_name = 'survey_info')
